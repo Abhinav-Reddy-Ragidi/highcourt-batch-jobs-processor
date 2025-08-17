@@ -119,3 +119,43 @@ PS C:\Users\Lenovo\high_court_judgements> $years = 2019..2025
 >> }
 
 the above is since I want to override some properties to be sent to the processing script so that it will resemble the command line arguments as we are sending previously.
+
+
+// $years = 1993..2025
+// >> foreach ($year in $years) {
+// >>     # Read the template JSON and replace the placeholder
+// >>     $json = Get-Content highcourt-pipeline-container-overrides.json -Raw
+// >>     $json = $json -replace "YEAR_PLACEHOLDER", "$year"
+// >> 
+// >>     # Write to a temporary overrides file
+// >>     $tmpFile = "overrides-$year.json"
+// >>     $json | Set-Content $tmpFile
+// >> 
+// >>     # Submit the batch job using the temporary overrides file
+// >>     Write-Host "Submitting job for year $year..."
+// >>     aws batch submit-job `
+// >>         --job-name "highcourt-job-$year" `
+// >>         --job-queue highcourt-pipeline-processing-queue `
+// >>         --job-definition highcourt-pipeline-processor ` 
+// >>         --container-overrides file://$tmpFile
+// >> }
+
+
+// powershell command to batch run the jobs - for all the years from 1993 t0 2025
+
+// command to run for single year
+
+# Replace YEAR_PLACEHOLDER with the actual year
+$json = Get-Content highcourt-pipeline-container-overrides.json -Raw
+$json = $json -replace "YEAR_PLACEHOLDER", "1993"
+
+# Write to a temporary overrides file
+$tmpFile = "overrides-1993.json"
+$json | Set-Content $tmpFile
+
+# Submit the batch job
+aws batch submit-job `
+    --job-name "highcourt-job-1993" `
+    --job-queue highcourt-pipeline-processing-queue `
+    --job-definition highcourt-pipeline-processor `
+    --container-overrides file://$tmpFile
