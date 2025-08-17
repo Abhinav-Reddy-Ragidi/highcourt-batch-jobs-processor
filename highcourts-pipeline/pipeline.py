@@ -135,7 +135,7 @@ def save_titles_and_stats_separately(court_name, year, successful_titles, proces
     :param successful_titles: list - List of successfully processed titles
     :param processing_stats: dict - Statistics for this processing run
     """
-    bucket = "all-title-files"
+    bucket = "judgements-integration-sample-bucket"
     court_name = court_name.replace('--', '-').replace(' ', '-')
     
     # File paths
