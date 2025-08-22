@@ -1,0 +1,13 @@
+{
+    "key": "data/pdf/year=1995/court=28_2/bench=aphc/APHC010028511995_1_2021-03-02.pdf",
+    "status": "ok_no_ocr",
+    "word_ratio_before": 0.881578947368421,
+    "lang_before": [
+        "en",
+        0.9999958767899285
+    ],
+    "word_ratio_after": null,
+    "lang_after": null,
+    "did_ocr": false,
+    "doc_type": "order"
+}
